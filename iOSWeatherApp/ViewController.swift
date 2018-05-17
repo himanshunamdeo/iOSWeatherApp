@@ -11,10 +11,13 @@ import GooglePlaces
 
 typealias ForecastFailedWithMessage = ( _ errorMessage: String? ) -> ()
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, GMSAutocompleteViewControllerDelegate, WeatherViewDelegate {
+    
+    
     var weatherForecastManager: WeatherForecastManager?
     
     override func viewDidLoad() {
+        
         weatherForecastManager = WeatherForecastManager()
         weatherForecastManager?.getWeatherForeCastForCurrentPlace(forecastFailedWithMessage: { (failedMessage) in
             if let failedMessage = failedMessage {
@@ -36,20 +39,57 @@ class ViewController: UIViewController {
     
     func checkForOrientation() {
         let weatherView: WeatherView = WeatherView.loadNib(isLandscape: UIDevice.current.orientation.isLandscape)
+        weatherView.delegate = self
         view.subviews.forEach { (view) in
             if view.isKind(of: WeatherView.self) {
                 view.removeFromSuperview()
             }
         }
-        let topConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: weatherView, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0)
-        let bottomConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: weatherView, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0)
-        let leadingConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.leading, relatedBy: NSLayoutRelation.equal, toItem: weatherView, attribute: NSLayoutAttribute.leading, multiplier: 1, constant: 0)
-        let trailingConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: weatherView, attribute: NSLayoutAttribute.trailing, multiplier: 1, constant: 0)
-        
+        weatherView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(weatherView)
-        view.addConstraints([topConstraint,bottomConstraint,leadingConstraint,trailingConstraint])
         view.bringSubview(toFront: weatherView)
+        let topConstraint = NSLayoutConstraint(item: weatherView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0)
+        let bottomConstraint = NSLayoutConstraint(item: weatherView, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0)
+        let leadingConstraint = NSLayoutConstraint(item: weatherView, attribute: NSLayoutAttribute.leadingMargin, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.leading, multiplier: 1, constant: 0)
+        let trailingConstraint = NSLayoutConstraint(item: weatherView, attribute: NSLayoutAttribute.trailingMargin, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.trailing, multiplier: 1, constant: 0)
+        view.addConstraints([topConstraint, bottomConstraint,leadingConstraint,trailingConstraint])
+        NSLayoutConstraint.activate([topConstraint, bottomConstraint,leadingConstraint,trailingConstraint])
+        weatherView.populateUI(weatherForecastManager: weatherForecastManager!)
     }
+    
+    
+    
+    // MARK - GMS Autocomplete view controller delegate methods
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        var placeInfo : PlaceInfoTuple = ("","")
+        for addressComponent in place.addressComponents! {
+            if addressComponent.type == "administrative_area_level_1" { //state
+                placeInfo.state = addressComponent.name
+            }
+            if addressComponent.type == "administrative_area_level_2" { //city
+                placeInfo.city = addressComponent.name
+            }
+        }
+        viewController.dismiss(animated: true, completion: nil)
+        weatherForecastManager?.getForecastWithYQLQuery(placeInfo: placeInfo)
+        populateUI()
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        
+    }
+
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        viewController.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK - Weather View delegate methods
+    func searchButtonDidTapped() {
+        let autocompleteViewController = GMSAutocompleteViewController()
+        autocompleteViewController.delegate = self
+        present(autocompleteViewController, animated: true, completion: nil)
+    }
+    
 }
 
 extension UIViewController {

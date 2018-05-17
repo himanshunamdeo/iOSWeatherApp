@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A3CB913420AD69C5005D5B32 /* FutureForecastCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3CB913320AD69C5005D5B32 /* FutureForecastCollectionViewCell.xib */; };
+		A3CB913620AD6AB0005D5B32 /* FutureForecastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CB913520AD6AB0005D5B32 /* FutureForecastCollectionViewCell.swift */; };
+		A3CB913820AD9888005D5B32 /* StringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CB913720AD9888005D5B32 /* StringExtention.swift */; };
 		A60601A020AC89C0003DE49F /* ResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A606019F20AC89C0003DE49F /* ResultsModel.swift */; };
 		A60601A220AC8BDB003DE49F /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60601A120AC8BDB003DE49F /* ChannelModel.swift */; };
 		A60601A420AC8F49003DE49F /* AstronomyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60601A320AC8F49003DE49F /* AstronomyModel.swift */; };
@@ -39,6 +42,9 @@
 		7080157C5469FADB9F691E1B /* Pods-iOSWeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSWeatherApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSWeatherApp/Pods-iOSWeatherApp.release.xcconfig"; sourceTree = "<group>"; };
 		74BCD2E6921407A69626CF2F /* Pods-iOSWeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSWeatherApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSWeatherApp/Pods-iOSWeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
 		971268314E3AEAD122AABE22 /* Pods_iOSWeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSWeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3CB913320AD69C5005D5B32 /* FutureForecastCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FutureForecastCollectionViewCell.xib; sourceTree = "<group>"; };
+		A3CB913520AD6AB0005D5B32 /* FutureForecastCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureForecastCollectionViewCell.swift; sourceTree = "<group>"; };
+		A3CB913720AD9888005D5B32 /* StringExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtention.swift; sourceTree = "<group>"; };
 		A606019F20AC89C0003DE49F /* ResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsModel.swift; sourceTree = "<group>"; };
 		A60601A120AC8BDB003DE49F /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
 		A60601A320AC8F49003DE49F /* AstronomyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstronomyModel.swift; sourceTree = "<group>"; };
@@ -137,6 +143,7 @@
 				A60601BD20ACC0A2003DE49F /* WeatherView.swift */,
 				A60601BB20ACB28E003DE49F /* WeatherLandscapeView.xib */,
 				A6C71A9620AC553000E74040 /* Main.storyboard */,
+				A3CB913320AD69C5005D5B32 /* FutureForecastCollectionViewCell.xib */,
 				A6C71A9C20AC553100E74040 /* Assets.xcassets */,
 				A6C71A9E20AC553100E74040 /* LaunchScreen.storyboard */,
 				A6C71AA120AC553100E74040 /* Info.plist */,
@@ -144,6 +151,8 @@
 				A679AED120AC5A3200618FF1 /* Utility.swift */,
 				A676E4AC20AC6966009AFCD3 /* Common.swift */,
 				A60601B720ACAB50003DE49F /* WeatherForecastManager.swift */,
+				A3CB913520AD6AB0005D5B32 /* FutureForecastCollectionViewCell.swift */,
+				A3CB913720AD9888005D5B32 /* StringExtention.swift */,
 			);
 			path = iOSWeatherApp;
 			sourceTree = "<group>";
@@ -217,6 +226,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3CB913420AD69C5005D5B32 /* FutureForecastCollectionViewCell.xib in Resources */,
 				A60601BA20ACB257003DE49F /* WeatherPortraitView.xib in Resources */,
 				A6C71AA020AC553100E74040 /* LaunchScreen.storyboard in Resources */,
 				A6C71A9D20AC553100E74040 /* Assets.xcassets in Resources */,
@@ -306,8 +316,10 @@
 				A60601B220AC9679003DE49F /* ConditionModel.swift in Sources */,
 				A6C71A9520AC553000E74040 /* ViewController.swift in Sources */,
 				A60601AA20AC91B1003DE49F /* ItemModel.swift in Sources */,
+				A3CB913820AD9888005D5B32 /* StringExtention.swift in Sources */,
 				A6C71A9B20AC553000E74040 /* iOSWeatherApp.xcdatamodeld in Sources */,
 				A676E4AD20AC6966009AFCD3 /* Common.swift in Sources */,
+				A3CB913620AD6AB0005D5B32 /* FutureForecastCollectionViewCell.swift in Sources */,
 				A60601A020AC89C0003DE49F /* ResultsModel.swift in Sources */,
 				A60601B820ACAB50003DE49F /* WeatherForecastManager.swift in Sources */,
 				A60601BE20ACC0A2003DE49F /* WeatherView.swift in Sources */,

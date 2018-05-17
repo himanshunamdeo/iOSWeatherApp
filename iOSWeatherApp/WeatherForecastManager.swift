@@ -19,6 +19,8 @@ class WeatherForecastManager {
     var astronomyPredictionData: AstronomyModel?
     var weatherForcasteData: ItemModel?
     var locationData: LocationModel?
+    var unitData: UnitsModel?
+    
     init() {
         locationManger  = CLLocationManager()
     }
@@ -32,14 +34,19 @@ class WeatherForecastManager {
             }
             
             let placeInfo = self.getCityAndStateFromLikelyHoodList(placeLiklyHoodList: placeLiklyHoodList)
-            let forecast = YQL.query(statement: self.getQueryForWeatherForecastIn(city: placeInfo.city, state: placeInfo.state))
-            self.currentWind = forecast?.query?.results?.channel?.wind
-            self.currentAtmosphereData = forecast?.query?.results?.channel?.atmosphere
-            self.astronomyPredictionData = forecast?.query?.results?.channel?.astronomy
-            self.weatherForcasteData = forecast?.query?.results?.channel?.item
-            self.locationData = forecast?.query?.results?.channel?.location
+            self.getForecastWithYQLQuery(placeInfo: placeInfo)
             forecastFailedWithMessage(nil)
         }
+    }
+    
+    public func getForecastWithYQLQuery(placeInfo: PlaceInfoTuple) {
+        let forecast = YQL.query(statement: self.getQueryForWeatherForecastIn(city: placeInfo.city, state: placeInfo.state))
+        self.currentWind = forecast?.query?.results?.channel?.wind
+        self.currentAtmosphereData = forecast?.query?.results?.channel?.atmosphere
+        self.astronomyPredictionData = forecast?.query?.results?.channel?.astronomy
+        self.weatherForcasteData = forecast?.query?.results?.channel?.item
+        self.locationData = forecast?.query?.results?.channel?.location
+        self.unitData = forecast?.query?.results?.channel?.units
     }
     
     private func getCityAndStateFromLikelyHoodList(placeLiklyHoodList: GMSPlaceLikelihoodList?) -> PlaceInfoTuple {
