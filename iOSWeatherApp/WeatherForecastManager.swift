@@ -13,7 +13,7 @@ typealias PlaceInfoTuple = (city: String, state: String)
 
 class WeatherForecastManager {
     
-    var locationManger: CLLocationManager?
+    
     var currentWind: WindModel?
     var currentAtmosphereData: AtmosphereModel?
     var astronomyPredictionData: AstronomyModel?
@@ -22,11 +22,11 @@ class WeatherForecastManager {
     var unitData: UnitsModel?
     
     init() {
-        locationManger  = CLLocationManager()
+         
     }
 
     public func getWeatherForeCastForCurrentPlace(forecastFailedWithMessage: @escaping ForecastFailedWithMessage) {
-        locationManger?.requestAlwaysAuthorization()
+        
         GMSPlacesClient.shared().currentPlace { (placeLiklyHoodList, error) in
             if let error = error {
                 forecastFailedWithMessage(error.localizedDescription)

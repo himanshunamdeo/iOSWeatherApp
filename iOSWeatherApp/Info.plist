@@ -43,8 +43,6 @@
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Want to use location</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Want to use location</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

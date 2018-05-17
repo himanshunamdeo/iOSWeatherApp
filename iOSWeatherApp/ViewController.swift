@@ -18,7 +18,13 @@ class ViewController: UIViewController, GMSAutocompleteViewControllerDelegate, W
     
     override func viewDidLoad() {
         
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActiveAgain), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         weatherForecastManager = WeatherForecastManager()
+        
+        
+    }
+    
+    @objc func applicationDidBecomeActiveAgain () {
         weatherForecastManager?.getWeatherForeCastForCurrentPlace(forecastFailedWithMessage: { (failedMessage) in
             if let failedMessage = failedMessage {
                 self.showAlert(title: "", message: failedMessage)
@@ -27,6 +33,7 @@ class ViewController: UIViewController, GMSAutocompleteViewControllerDelegate, W
             self.populateUI()
         })
     }
+    
     
     func populateUI() {
         checkForOrientation()

@@ -14,11 +14,12 @@ import GooglePlaces
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let locationManger = CLLocationManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         GMSPlacesClient.provideAPIKey(Constants.PLACES_API_KEY)
+        locationManger.requestWhenInUseAuthorization()
         
         return true
     }
