@@ -8,15 +8,19 @@
 
 import UIKit
 import CoreData
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let locationManger = CLLocationManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        GMSPlacesClient.provideAPIKey(Constants.PLACES_API_KEY)
+        locationManger.requestWhenInUseAuthorization()
+        
         return true
     }
 
